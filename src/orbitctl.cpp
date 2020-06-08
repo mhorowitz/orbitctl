@@ -308,6 +308,9 @@ Storage<IOUSBDeviceInterface**> getCamera() {
               "getting product");
 
     if (vendor == 0x046d && product == 0x0994) {
+      // This uses the first matching device.
+      // TODO: support multiple devices.
+
       return std::move(device);
     }
   }
@@ -444,6 +447,7 @@ Camera scanDescriptors(bool display) {
   }
   
   Camera camera;
+  // Just use the first matching video interface
   camera.interface = std::move(*it);
   // clean up some state
   it = std::move(ifaces.end());
