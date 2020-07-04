@@ -368,6 +368,7 @@ struct Camera {
   uint8_t motorUnit;
   uint8_t hwControlUnit;
 
+  bool isValid() { return interface.isValid(); }
   void send(Request& req);
 };
 
@@ -438,12 +439,14 @@ Camera scanDescriptors(bool display) {
   Storage<IOUSBDeviceInterface**> device = getCamera();
   if (!device.isValid()) {
     printf("No Logitech Orbit AF found\n");
+    return {};
   }
 
   USBVideoInterfaces ifaces{device.ref()};
   auto it = ifaces.begin();
   if (it == ifaces.end()) {
     printf("No video interfaces found\n");
+    return {};
   }
   
   Camera camera;
@@ -729,6 +732,8 @@ int main(int argc, char *argv[]) {
     if (argc != 3) usage();
     std::string dir = argv[2];
     if (dir == "left") {
+      // Larger value arguments to panTiltRelative work, I was just
+      // too lazy to write the argument parsing.
       req.panTiltRelative(1, 0);
     } else if (dir == "right") {
       req.panTiltRelative(-1, 0);
@@ -763,6 +768,9 @@ int main(int argc, char *argv[]) {
 
   try {
     Camera camera = scanDescriptors(display);
+    if (!camera.isValid()) {
+      return 1;
+    }
     if (!display) {
       camera.send(req);
     }
