@@ -1,0 +1,79 @@
+This is a listing of references I found which were helpful in
+understanding what is going on with the Orbit AF.
+
+includes extension units for the same extensions as the Orbit, but
+using CS_INTERFACE descriptor type instead of the Logitech vendor one.
+
+  https://github.com/libuvc/libuvc/blob/master/cameras/quickcampro9000.txt
+
+Apple USB API docs
+
+  https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/USBBook/USBDeviceInterfaces/USBDevInterfaces.html
+  https://developer.apple.com/documentation/iokit/iousblib_h?language=objc
+  https://developer.apple.com/documentation/iokit/usb_h_user-space?language=objc
+
+This explains and points to documentation of the format of a vendor
+specific descriptor type.
+
+  https://stackoverflow.com/questions/19464269/where-to-find-information-on-custom-usb-descriptor-types
+
+spec referred to by above
+
+  https://www.usb.org/sites/default/files/usbccs10.pdf
+
+Hey. Microsoft controllers use vendor descriptor types, too.
+
+  https://www.partsnotincluded.com/understanding-the-xbox-360-wired-controllers-usb-data/
+
+How to use Wireshark to monitor and filter the USB bus on a Mac
+
+  https://stackoverflow.com/questions/19464269/where-to-find-information-on-custom-usb-descriptor-types
+  https://wiki.wireshark.org/CaptureSetup/USB
+  https://www.wireshark.org/docs/dfref/u/usb.html
+  https://www.wireshark.org/docs/dfref/u/usbvideo.html
+
+extension unit for LED control
+
+  http://en.techinfodepot.shoutwiki.com/wiki/82066163-7050-ab49-b8cc-b3855e8d221f
+
+A page about another Logitech camera which has some of the same extension GUIDs
+
+  http://en.techinfodepot.shoutwiki.com/wiki/Logitech_Webcam_Pro_9000
+
+Some different drivers which use the Logitech extensions
+
+I'm skeptical of the 1/64th degree absolute pan/tilt existing on the
+Orbit AF.  Reset seems right, though.
+
+  https://github.com/yangh/uvcvideo/blob/master/uvc/uvc_driver.c
+  http://docs.ros.org/jade/api/tuw_uvc/html/dynctrl-logitech_8h_source.html
+  https://devel.iri.upc.edu/docs/roswiki/docs/hydro/api/corobot_pantilt/html/dynctrl_8c_source.html
+
+A real lsusb for Mac, based on the linux one.  Fully decodes
+descriptors, but doesn't know about the vendor-specific types (just
+prints UNRECOGNIZED, but at least dumps the raw bytes).
+
+  https://github.com/mikhailai/homebrew-misc
+
+Some docs and sample code for Mac video playback
+
+  https://developer.apple.com/documentation/avfoundation/avcapturesession?language=objc
+
+A cli tool for manipulating UVC devices on Mac.  It compiles and
+works, but it's not really built to be easily extensible in the ways I
+need.
+
+  https://github.com/jtfrey/uvc-util
+
+A tool which claims to support pan/tilt.  But it's a decade old, and I
+couldn't get it to build on my Mac.
+
+  https://github.com/kazu/UVCCameraControl
+
+The original upstream for the above.  I don't think it does pan/tilt, though.
+
+  https://phoboslab.org/log/2009/07/uvc-camera-control-for-mac-os-x
+
+USB Video Class docs.
+
+  https://www.usb.org/document-library/video-class-v15-document-set
