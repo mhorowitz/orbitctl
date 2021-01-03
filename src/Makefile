@@ -28,4 +28,4 @@ $(PROG): $(SRCS) $(HDRS) Makefile
 	$(CXX) $(CFLAGS) -o $(PROG) $(SRCS) $(LDFLAGS)
 
 clean:
-	rm -f $(PROG)
+	rm -rf $(PROG) $(PROG).dSYM
